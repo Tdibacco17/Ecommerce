@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { GlobalProvider } from "@/context/GlobalProvider";
+import ProductSheet from "@/components/ProductSheet/ProductSheet";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,9 +24,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} antialiased`}
       >
-        <main>
-          {children}
-        </main>
+        <GlobalProvider>
+          <main className="flex flex-col flex-1 h-full w-full relative">
+            <div className="w-full max-w-6xl m-auto px-4">
+              {children}
+            </div>
+            <ProductSheet />
+          </main>
+        </GlobalProvider>
       </body>
     </html>
   );
